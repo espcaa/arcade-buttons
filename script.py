@@ -1,5 +1,5 @@
 import gpiod
-import pyautogui
+import keyboard
 import time
 
 # GPIO pin numbers (BCM pin numbering)
@@ -31,23 +31,23 @@ try:
         # Check each button press (GPIO line will be low when button is pressed)
         if left_line.get_value() == 0:  # Button pressed (Low)
             print("Left button pressed")
-            pyautogui.press("left")
+            keyboard.press_and_release("left")
 
         if right_line.get_value() == 0:
             print("Right button pressed")
-            pyautogui.press("right")
+            keyboard.press_and_release("right")
 
         if down_line.get_value() == 0:
             print("Down button pressed")
-            pyautogui.press("down")
+            keyboard.press_and_release("down")
 
         if pause_line.get_value() == 0:
             print("Pause button pressed")
-            pyautogui.press("escape")
+            keyboard.press_and_release("esc")  # Use "esc" instead of "escape"
 
         if enter_line.get_value() == 0:
             print("Enter button pressed")
-            pyautogui.press("enter")
+            keyboard.press_and_release("enter")
 
         time.sleep(0.1)  # Sleep for 100ms to debounce
 

@@ -15,27 +15,27 @@ with gpiod.request_lines('/dev/gpiochip0', consumer="blink-example",
     config={
         LEFT_PIN: gpiod.LineSettings(
             direction=Direction.INPUT,
-            edge_detection=gpiod.LineSettings.EdgeDetection.BOTH_EDGES,
+            edge_detection=gpiod.LineSettings.edge_detection.BOTH_EDGES,
             bias=gpiod.LineSettings.Bias.PULL_UP,
         ),
         RIGHT_PIN: gpiod.LineSettings(
             direction=Direction.INPUT,
-            edge_detection=gpiod.LineSettings.EdgeDetection.BOTH_EDGES,
+            edge_detection=gpiod.LineSettings.edge_detection.BOTH_EDGES,
             bias=gpiod.LineSettings.Bias.PULL_UP,
         ),
         DOWN_PIN: gpiod.LineSettings(
             direction=Direction.INPUT,
-            edge_detection=gpiod.LineSettings.EdgeDetection.BOTH_EDGES,
+            edge_detection=gpiod.LineSettings.edge_detection.BOTH_EDGES,
             bias=gpiod.LineSettings.Bias.PULL_UP,
         ),
         PAUSE_PIN: gpiod.LineSettings(
             direction=Direction.INPUT,
-            edge_detection=gpiod.LineSettings.EdgeDetection.BOTH_EDGES,
+            edge_detection=gpiod.LineSettings.edge_detection.BOTH_EDGES,
             bias=gpiod.LineSettings.Bias.PULL_UP,
         ),
         ENTER_PIN: gpiod.LineSettings(
             direction=Direction.INPUT,
-            edge_detection=gpiod.LineSettings.EdgeDetection.BOTH_EDGES,
+            edge_detection=gpiod.LineSettings.edge_detection.BOTH_EDGES,
             bias=gpiod.LineSettings.Bias.PULL_UP,
         ),
     },

@@ -46,12 +46,8 @@ with gpiod.request_lines('/dev/gpiochip0', consumer="blink-example",
             for event in request.read_edge_events():
                 line_offset = event.line_offset  # The GPIO pin that triggered the event
                 event_type = event.event_type  # Type of event (e.g., rising or falling edge)
-                timestamp = event.timestamp  # Event timestamp in nanoseconds
-                global_seqno = event.global_seqno  # Global sequence number
-                line_seqno = event.line_seqno  # Line-specific sequence number
                             # Print event information (for debugging purposes)
-                print(f"Event on line {line_offset}: {event_type}, Timestamp: {timestamp}, "
-                f"Global Seq: {global_seqno}, Line Seq: {line_seqno}")
+                print(f"Event on line {line_offset}: {event_type}")
 
                 if line_offset == LEFT_PIN:
                                 key = 'left'

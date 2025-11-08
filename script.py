@@ -10,9 +10,15 @@ RIGHT_PIN = 6
 DOWN_PIN = 13
 PAUSE_PIN = 19
 ENTER_PIN = 26
+UP_PIN = 0
 
 with gpiod.request_lines('/dev/gpiochip0', consumer="blink-example",
     config={
+        UP_PIN: gpiod.LineSettings(
+            direction=Direction.INPUT,
+            edge_detection=gpiod.LineSettings.edge_detection.BOTH,
+            bias=gpiod.LineSettings.bias.PULL_UP,
+        ),
         LEFT_PIN: gpiod.LineSettings(
             direction=Direction.INPUT,
             edge_detection=gpiod.LineSettings.edge_detection.BOTH,
@@ -59,6 +65,8 @@ with gpiod.request_lines('/dev/gpiochip0', consumer="blink-example",
                                 key = 'esc'
                 elif line_offset == ENTER_PIN:
                                 key = 'enter'
+                elif line_offset == UP_PIN:
+                                key = 'up'
                 else:
                                 continue  # If the event is from an untracked GPIO line, skip it
 

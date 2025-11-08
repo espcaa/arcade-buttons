@@ -63,7 +63,7 @@ with gpiod.request_lines('/dev/gpiochip0', consumer="blink-example",
                                 continue  # If the event is from an untracked GPIO line, skip it
 
                             # Handle key press or release based on event type
-                if event_type == gpiod.LineEvent.Type.RISING_EDGE:
+                if event_type == gpiod.EdgeEvent.Type.RISING_EDGE:
                                 keyboard.release(key)  # Key release on rising edge
                 elif event_type == gpiod.LineEvent.Type.FALLING_EDGE:
                                 keyboard.press(key)  # Key press on falling edge

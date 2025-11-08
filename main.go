@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"github.com/go-vgo/robotgo"
+	"time"
 )
 
 type arcade struct {
@@ -57,6 +58,6 @@ func main() {
 			println("Enter button pressed")
 			robotgo.KeyTap("enter")
 		}
-		rpio.Delay(100 * rpio.Millisecond)
+		time.Sleep(100 * time.Millisecond)
 	}
 }

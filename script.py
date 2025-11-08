@@ -43,7 +43,7 @@ with gpiod.request_lines('/dev/gpiochip0', consumer="blink-example",
     while True:
         events = request.wait_edge_events(timeout=1)
         if events:
-            for event in request.read_events():
+            for event in request.read_edge_events():
                 line_offset = event.line_offset  # The GPIO pin that triggered the event
                 event_type = event.event_type  # Type of event (e.g., rising or falling edge)
                 timestamp = event.timestamp  # Event timestamp in nanoseconds

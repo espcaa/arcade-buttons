@@ -17,7 +17,8 @@ with gpiod.request_lines('/dev/gpiochip0', consumer="blink-example",
     config={
         TAB_PIN: gpiod.LineSettings(
             direction=Direction.OUTPUT,
-            output_value=Value.LOW,
+            edge_detection=gpiod.LineSettings.edge_detection.NONE,
+            bias=gpiod.LineSettings.bias.DISABLED,
         ),
         UP_PIN: gpiod.LineSettings(
             direction=Direction.INPUT,

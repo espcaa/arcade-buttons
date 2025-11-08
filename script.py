@@ -41,27 +41,36 @@ with gpiod.request_lines('/dev/gpiochip0', consumer="blink-example",
     },
 ) as request:
     while True:
-        events = request.event_wait(timeout=1)
+        events = request.wait_edge_events(timeout=1)
         if events:
             for event in request.read_events():
-                line_offset = event.line_offset
-                event_type = event.event_type
+                            line_offset = event.line_offset  # The GPIO pin that triggered the event
+                            event_type = event.event_type  # Type of event (e.g., rising or falling edge)
+                            timestamp = event.timestamp  # Event timestamp in nanoseconds
+                            global_seqno = event.global_seqno  # Global sequence number
+                            line_seqno = event.line_seqno  # Line-specific sequence number
 
-                if line_offset == LEFT_PIN:
-                    key = 'left'
-                elif line_offset == RIGHT_PIN:
-                    key = 'right'
-                elif line_offset == DOWN_PIN:
-                    key = 'down'
-                elif line_offset == PAUSE_PIN:
-                    key = 'esc'
-                elif line_offset == ENTER_PIN:
-                    key = 'enter'
-                else:
-                    continue
+                            # Print event information (for debugging purposes)
+                            print(f"Event on line {line_offset}: {event_type}, Timestamp: {timestamp}, "
+                                  f"Global Seq: {global_seqno}, Line Seq: {line_seqno}")
 
-                if event_type == gpiod.LineEvent.Type.RISING_EDGE:
-                    keyboard.release(key)
-                elif event_type == gpiod.LineEvent.Type.FALLING_EDGE:
-                    keyboard.press(key)
-        time.sleep(0.01)
+                            if line_offset == LEFT_PIN:
+                                key = 'left'
+                            elif line_offset == RIGHT_PIN:
+                                key = 'right'
+                            elif line_offset == DOWN_PIN:
+                                key = 'down'
+                            elif line_offset == PAUSE_PIN:
+                                key = 'esc'
+                            elif line_offset == ENTER_PIN:
+                                key = 'enter'
+                            else:
+                                continue  # If the event is from an untracked GPIO line, skip it
+
+                            # Handle key press or release based on event type
+                            if event_type == gpiod.LineEvent.Type.RISING_EDGE:
+                                keyboard.release(key)  # Key release on rising edge
+                            elif event_type == gpiod.LineEvent.Type.FALLING_EDGE:
+                                keyboard.press(key)  # Key press on falling edge
+
+                    time.sleep(0.01)
